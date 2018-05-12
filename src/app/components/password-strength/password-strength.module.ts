@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
-import { LoginComponent } from './login.component';
-import { LoginService } from './login.service';
-import { ResetStepperComponent } from './reset-stepper/reset-stepper.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
     MatCardModule,
-    MatDialogModule,
     MatIconModule,
     MatInputModule,
-    MatProgressSpinnerModule,
-    MatStepperModule,
-    MatSnackBarModule
+    MatProgressBarModule,
+    MatBadgeModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
+import { PasswordStrengthComponent } from './password-strength.component';
 
 @NgModule({
     imports: [
@@ -25,18 +21,15 @@ import { CommonModule } from '@angular/common';
 
         FlexLayoutModule,
 
+        MatBadgeModule,
         MatButtonModule,
         MatCardModule,
-        MatDialogModule,
         MatIconModule,
         MatInputModule,
-        MatProgressSpinnerModule,
-        MatStepperModule,
-        MatSnackBarModule
+        MatProgressBarModule
     ],
-    exports: [LoginComponent],
-    declarations: [LoginComponent, ResetStepperComponent],
-    providers: [LoginService],
-    entryComponents: [ResetStepperComponent]
+    exports: [PasswordStrengthComponent],
+    declarations: [PasswordStrengthComponent],
+    providers: [],
 })
-export class LoginModule { }
+export class PasswordStrengthModule { }
