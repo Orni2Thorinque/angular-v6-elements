@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { createCustomElement } from '@angular/elements';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
     MatButtonModule,
@@ -8,28 +10,38 @@ import {
     MatInputModule,
     MatProgressBarModule,
     MatBadgeModule,
+    MatFormFieldModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { CommonModule } from '@angular/common';
+
 import { PasswordStrengthComponent } from './password-strength.component';
 
 @NgModule({
     imports: [
+        BrowserModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        CommonModule,
-
         FlexLayoutModule,
 
         MatBadgeModule,
         MatButtonModule,
         MatCardModule,
+        MatFormFieldModule,
         MatIconModule,
         MatInputModule,
         MatProgressBarModule
     ],
+    entryComponents: [PasswordStrengthComponent],
     exports: [PasswordStrengthComponent],
     declarations: [PasswordStrengthComponent],
     providers: [],
+    bootstrap: []
 })
-export class PasswordStrengthModule { }
+export class PasswordStrengthModule {
+    constructor(public injector: Injector) {
+        const el = createCustomElement(PasswordStrengthComponent, { injector: this.injector });
+        window.customElements.define('str-pass', el);
+    }
+
+    ngDoBootstrap() { }
+}
