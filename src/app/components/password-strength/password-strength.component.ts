@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, ValidationErrors, FormControl, Validators } from '@angular/forms';
 import { scorePassword } from '../../shared/utils/password-strength.util';
 
@@ -12,6 +12,9 @@ export class PasswordStrengthComponent implements OnInit {
   public mode: 'determinate' | 'buffer' = 'determinate';
   public visibility: 'visibility' | 'visibility_off' = 'visibility_off';
 
+  @Output('complete') complete: EventEmitter<string>;
+  @Input('author') author: string;
+
   get value(): number {
     let val = scorePassword(this.passwordFormGroup.get('password').value);
 
@@ -19,6 +22,7 @@ export class PasswordStrengthComponent implements OnInit {
       this.passwordFormGroup.get('password').setErrors({ weak: true });
     } else if (val >= 100) {
       val = 100;
+      this.complete.emit(this.passwordFormGroup.get('password').value);
     }
 
     return isNaN(val) ? 0 : val;
@@ -41,7 +45,9 @@ export class PasswordStrengthComponent implements OnInit {
     return this.visibility === 'visibility' ? 'text' : 'password';
   }
 
-  constructor() { }
+  constructor() {
+    this.complete = new EventEmitter<string>();
+  }
 
   ngOnInit() {
     this.passwordFormGroup = new FormGroup({
