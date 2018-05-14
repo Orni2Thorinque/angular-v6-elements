@@ -1,6 +1,7 @@
 # angular-v6-playground
 ### Install & Build element
 npm i
+
 npm run build:elements
 
 ------------
