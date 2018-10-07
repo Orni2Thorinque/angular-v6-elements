@@ -1,4 +1,7 @@
-# angular-v6-playground
+# angular-v6-elements
+Produces fully operational webcomponents based on Angular 6 framework into a JS script for reuse.
+!!! Works with Webpack and Zone.js (Do not load it twice) !!!
+
 ### Install & Build element
 npm i
 
